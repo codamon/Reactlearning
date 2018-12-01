@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    /**
+     * check input constracture is an array type
+     * @param array[]
+     * @returns arry[] if the input is array otherwise return null
+     */
+    function checkArray() {
+
+        var ary = [];
+        ary = arguments[0];
+
+        if(ary.constructor != Array){ // check the first argument is array
+            console.log("first item must be array");
+            return null;
+        }
+
+        return ary;
+    }
+
+    /**
+     * @param1 array
+     * @param2...n Items push into array
+     * return array
+     */
+    function pushFnc() {
+        var i = 0;
+        var ary = [];
+        ary = checkArray(arguments[0]);
+
+        i = ary.length; // get array length
+
+        for(var a = 0; a<arguments.length-1;a++){ // push each argument in the end
+            if(arguments[a+1] != null){ // check argument is not null
+                ary[i] = arguments[a+1];
+                i++;
+            }
+            else {
+                console.log("input argument is null");
+                return ary;
+            }
+        }
+
+        return ary;
+    }
+
+    /**
+     * @param array[]
+     * @return poped Item
+     */
+    function popFnc() {
+        var i = 0;
+        var ary = [];
+        var ary2 = [];
+
+        ary =checkArray(arguments[0]);
+
+        var popedItem = ary[ary.length-1];
+        ary.length -= 1;
+
+        return popedItem;
+
+    }
+
+    /**
+     * @param array
+     * delate first item and return it
+     * @return removedItem
+     */
+    function shiftFnc() {
+        var arry1 = [];
+        var arryShift = [];
+
+        arry1 = checkArray(arguments[0]);
+
+        var removedItem = arry1[0];
+        for(var i = 0; i < arry1.length; i++) {
+            if (i != 0) {
+                arryShift[i-1] = arry1[i];
+            }
+        }
+
+        for(var i = 0; i < arryShift.length; i++){
+            arry1[i] = arryShift[i];
+        }
+
+        arry1.pop();
+        return removedItem;
+    }
+
+    /**
+     * @param1 array
+     * @param2..n items to add to front of array
+     * @return new length of array
+     */
+    function unshiftFnc() {
+        var arry1 = [];
+        var tArray = [];
+        arry1 = checkArray(arguments[0]);
+
+        // add each item in to templet array
+        for(var i = 0; i < arguments.length - 1; i++){
+            if(arguments[i+1] != null) {
+                tArray[i] = arguments[i + 1];
+            }
+        }
+
+        // add old array element after new array
+        for(var i = 0; i < arry1.length; i++){
+            var a = tArray.length;
+            tArray[a] = arry1[i];
+        }
+
+        // assign element in to orangnal array by value
+        for(var i = 0; i < tArray.length; i++){
+            arry1[i] = tArray[i];
+        }
+
+        return arry1.length;
+    }
+
+    /**
+     * @param array
+     * reverse array and returen it
+     * @return tArray
+     */
+    function reversFnc() {
+        var arr1 = [];
+        var tArray = [];
+        var a = 0;
+        arr1 = checkArray(arguments[0]);
+
+        for(var i = arr1.length-1; i >= 0; i--){
+            tArray[a] = arr1[i];
+            a++;
+        }
+
+        return tArray;
+
+    }
+     var array1 = [];
+     array1[0] = 'a';
+     array1[1] = 'b';
+     array1[2] = 'c';
+    //pushFnc(array1, 'f', 'g', 'h');
+    //console.log('push test', array1);
+    //console.log("pop", popFnc(array1));
+    console.log("test shift func", shiftFnc(array1));
+    //shiftFnc(array1);
+    //console.log("test unshift func", unshiftFnc(array1, 1,2,3));
+    //console.log("test reverse func", reversFnc(array1));
+
+    console.log("print array1", array1);
+
+</script>
+</body>
+</html>
